@@ -33,7 +33,7 @@ mongoose.connect(MONGODB_URI, { urlNewUrlParser: true });
 
 // Routes
 
-app.get("/", function (req, res) {
+app.get("/scrape", function (req, res) {
 
     console.log("Grabbing NYT news articles");
 
