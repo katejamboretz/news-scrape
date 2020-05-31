@@ -33,7 +33,7 @@ mongoose.connect(MONGODB_URI, { urlNewUrlParser: true });
 
 // Routes
 
-app.get("/scrape", function (req, res) {
+app.get("/", function (req, res) {
 
     console.log("Grabbing NYT news articles");
 
@@ -68,7 +68,7 @@ app.get("/scrape", function (req, res) {
             // }
         });
 
-        res.send("Scrape Complete");
+        // res.send("Scrape Complete");
     })
 
 });
