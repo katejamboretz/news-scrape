@@ -27,7 +27,9 @@ app.use(express.static("public"));
 
 // Connect to Mongo DB
 
-mongoose.connect("mongodb://localhost/newsScrape", { urlNewUrlParser: true });
+var MONGODB_URI = process.env.MONDODB_URI || "mongodb://localhost/newsScrape";
+
+mongoose.connect(MONGODB_URI, { urlNewUrlParser: true });
 
 // Routes
 

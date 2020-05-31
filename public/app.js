@@ -1,10 +1,10 @@
 $.getJSON("/articles", function (data) {
     for (var i = 0; i < data.length; i++) {
-        $("#articles").append("<p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].summary + "</p><a href = 'https://www.nytimes.com" + data[i].link + "'>Link to Full Article</a>");
+        $("#articles").append("<div class='col mb-4'><div class='card m-5' style='width: 36rem;'><div class='card-body'><div class='article' data-id='" + data[i]._id + "'><h2 class='text-center m-15'>" + data[i].title + "</h2><br /><p class='text-center m-15'>" + data[i].summary + "</p><p class='text-center'><a href = 'https://www.nytimes.com" + data[i].link + "'>Link to Full Article</a></p></div></div></div>");
     }
 });
 
-$(document).on("click", "p", function () {
+$(document).on("click", ".article", function () {
     $("#notes").empty();
     var thisID = $(this).attr("data-id");
 
@@ -14,10 +14,10 @@ $(document).on("click", "p", function () {
         url: "/articles/" + thisID
     }).then(function (data) {
         console.log(data);
-        $("#notes").append("<h2>" + data.title + "</h2>");
-        $("#notes").append("<input id='titleinput' name='title' >");
-        $("#notes").append("<textarea id='bodyinput' name='body'></textarea>");
-        $("#notes").append("<button data-id='" + data._id + "' id='savenote'>Save Note</button>");
+        $("#notes").append("<div class='card'><div class='card-body'><h3>Notes for: " + data.title + "</h3>");
+        $("#notes").append("<br/><input  class='m-3' id='titleinput' name='title' placeholder='Title' ><br/>");
+        $("#notes").append("<textarea class='m-3' id='bodyinput' name='body' placeholder = 'Notes'></textarea><br/>");
+        $("#notes").append("<button class = 'btn btn-primary m-3' data-id='" + data._id + "' id='savenote'>Save Note</button></div></div>");
 
         if (data.note) {
             $("#titleinput").val(data.note.title);
