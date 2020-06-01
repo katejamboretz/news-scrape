@@ -85,7 +85,7 @@ app.get("/articles", function (req, res) {
 
 app.post("/articles", function (req, res) {
     db.Article.create(req.body).then(function (dbArticle) {
-        // console.log(dbArticle);
+        res.json(dbArticle);
     }).catch(function (err) {
         console.log(err);
     })
