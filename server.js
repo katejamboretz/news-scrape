@@ -39,7 +39,7 @@ app.get("/scrape", function (req, res) {
 
     axios.get("https://www.nytimes.com/").then(function (response) {
 
-        var $ = cheerio.load(response.data);
+        let $ = cheerio.load(response.data);
         let result = [];
         $("article").each(function (i, element) {
 
@@ -80,7 +80,7 @@ app.get("/scrape", function (req, res) {
             }
 
         });
-        console.log(result)
+        // console.log(result)
         res.json(result);
 
     }).catch(function (err) {
@@ -122,6 +122,14 @@ app.post("/articles/:id", function (req, res) {
         res.json(err);
     });
 });
+
+app.delete("/articles/:id", function (req, res) {
+    db.Article.deleteOne({ _id: req.params.id }).then(function (dbArticle) {
+        res.json(dbArticle);
+    }).catch(function (err) {
+        res.json(err);
+    })
+})
 
 app.listen(PORT, function () {
     console.log("App running on port " + PORT + "!");
