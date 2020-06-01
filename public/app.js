@@ -95,7 +95,7 @@ $(document).on("click", "#add-note", function () {
         method: "GET",
         url: "/articles/" + thisID
     }).then(function (data) {
-        console.log(data);
+        // console.log(data);
         $("#notes").append("<div class='card'><div class='card-body'><h3>Notes for: " + data.title + "</h3>");
         $("#notes").append("<br/><input  class='m-3' id='titleinput' name='title' placeholder='Title' ><br/>");
         $("#notes").append("<textarea class='m-3' id='bodyinput' name='body' placeholder = 'Notes'></textarea><br/>");
@@ -120,7 +120,7 @@ $(document).on("click", "#savenote", function () {
             body: $("#bodyinput").val()
         }
     }).then(function (data) {
-        console.log(data);
+        // console.log(data);
         $("#notes").empty();
     });
 
