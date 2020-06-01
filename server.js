@@ -27,9 +27,9 @@ app.use(express.static("public"));
 
 // Connect to Mongo DB
 
-var MONGODB_URI = process.env.MONDODB_URI || "mongodb://localhost/newsScrape";
+var MONGODB_URL = process.env.MONDODB_URL || "mongodb://localhost/newsScrape";
 
-mongoose.connect(MONGODB_URI, { urlNewUrlParser: true });
+mongoose.connect(MONGODB_URL, { urlNewUrlParser: true });
 
 // Routes
 
@@ -85,7 +85,7 @@ app.get("/articles", function (req, res) {
 
 app.post("/articles", function (req, res) {
     db.Article.create(req.body).then(function (dbArticle) {
-        console.log(dbArticle);
+        // console.log(dbArticle);
     }).catch(function (err) {
         console.log(err);
     })

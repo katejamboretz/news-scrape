@@ -43,7 +43,7 @@ $(document).on("click", "#save-article", function () {
     let thisTitle = $(this).attr("article-title");
     let thisSummary = $(this).attr("article-summary");
     let thisLink = $(this).attr("article-link");
-    console.log("Title: " + thisTitle + ", Sum: " + thisSummary + ", Link: " + thisLink);
+    // console.log("Title: " + thisTitle + ", Sum: " + thisSummary + ", Link: " + thisLink);
 
     $.ajax({
         method: "POST",
@@ -54,7 +54,7 @@ $(document).on("click", "#save-article", function () {
             link: thisLink
         }
     }).then(function (data) {
-        console.log(data);
+        // console.log(data);
 
     })
 });
