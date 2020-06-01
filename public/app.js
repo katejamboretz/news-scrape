@@ -47,7 +47,7 @@ $(document).on("click", "#save-article", function () {
 
     $.ajax({
         method: "POST",
-        url: "/articles/",
+        url: "/articles",
         data: {
             title: thisTitle,
             summary: thisSummary,
