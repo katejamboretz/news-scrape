@@ -1,12 +1,56 @@
-$.getJSON("/articles", function (data) {
-    for (var i = 0; i < data.length; i++) {
-        $("#articles").append("<div class='col mb-4'><div class='card m-5' style='width: 36rem;'><div class='card-body'><div class='article' data-id='" + data[i]._id + "'><h2 class='text-center m-15'>" + data[i].title + "</h2><br /><p class='text-center m-15'>" + data[i].summary + "</p><p class='text-center'><a href = 'https://www.nytimes.com" + data[i].link + "'>Link to Full Article</a></p></div></div></div>");
-    }
+
+$(document).on("click", "#saved", function () {
+    $("#articles").empty();
+    $("#articles").append("<div class='card'><div class='card-body'><h1 class='text-center'>Saved Articles</h1></div></div>")
+
+    $.getJSON("/articles", function (data) {
+        for (var i = 0; i < data.length; i++) {
+            $("#articles").append("<div class='col mb-4'><div class='card m-5'><div class='card-body'><div class='article' data-id='" + data[i]._id + "'><h2 class='text-center m-15'>" + data[i].title + "</h2><br /><p class='text-center m-15'>" + data[i].summary + "</p><p class='text-center'><a href = 'https://www.nytimes.com" + data[i].link + "'>Link to Full Article</a></p><p><button type='button' class='btn btn-primary m-2' id='add-note' data-id='" + data[i]._id + "'>Add note</button><button type='button' class='btn btn-primary m-2' id='remove-article' data-id='" + data[i]._id + "'>Remove</button></p></div></div></div></div>");
+        }
+    });
 });
 
-$(document).on("click", ".article", function () {
+$(document).on("click", "#scrape", function () {
+    $("#articles").empty();
+    $("#articles").append("<div class='card'><div class='card-body'><h1 class='text-center'>Scraped Articles</h1></div></div>")
+
+    $.ajax({
+        method: "GET",
+        url: "/scrape/",
+    }).then(function (data) {
+        // console.log(data);
+        for (var i = 0; i < data.length; i++) {
+            $("#articles").append("<div class='col mb-4'><div class='card m-5'><div class='card-body'><div class='article' data-id='" + data[i]._id + "'><h2 class='text-center m-15'>" + data[i].title + "</h2><br /><p class='text-center m-15'>" + data[i].summary + "</p><p class='text-center'><a href = 'https://www.nytimes.com" + data[i].link + "'>Link to Full Article</a></p><p><button type='button' class='btn btn-primary m-2' id='save-article' article-title='" + data[i].title + "' + article-summary='" + data[i].summary + "' article-link = '" + data[i].link + "'data-id='" + data[i]._id + "'>Save Article</button></p></div></div></div></div>");
+        }
+    })
+});
+
+$(document).on("click", "#save-article", function () {
+    // let thisID = $(this).attr("data-id");
+    let thisTitle = $(this).attr("article-title");
+    let thisSummary = $(this).attr("article-summary");
+    let thisLink = $(this).attr("article-link");
+    console.log("Title: " + thisTitle + ", Sum: " + thisSummary + ", Link: " + thisLink);
+
+    $.ajax({
+        method: "POST",
+        url: "/articles/",
+        data: {
+            title: thisTitle,
+            summary: thisSummary,
+            link: thisLink
+        }
+    }).then(function (data) {
+        console.log(data);
+
+    })
+})
+
+// $(document).on("click", "#remove-article", function () { })
+
+$(document).on("click", "#add-note", function () {
     $("#notes").empty();
-    var thisID = $(this).attr("data-id");
+    let thisID = $(this).attr("data-id");
 
 
     $.ajax({

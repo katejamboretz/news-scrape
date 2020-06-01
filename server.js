@@ -40,10 +40,11 @@ app.get("/scrape", function (req, res) {
     axios.get("https://www.nytimes.com/").then(function (response) {
 
         var $ = cheerio.load(response.data);
-
+        let result = [];
         $("article").each(function (i, element) {
-            let result = {};
 
+
+            let _id = i;
             let title = $(element).find("h2").text();
             let alt_title = $(element).find("span.balancedHeadline")
             let summary = $(element).find("p.e1lfvv700").text();
@@ -55,22 +56,35 @@ app.get("/scrape", function (req, res) {
 
 
             if (link !== undefined) {
-                result.title = title || alt_title,
-                    result.summary = summary || alt_summary,
-                    result.link = link,
+                result.push({
+                    _id: _id,
+                    title: title || alt_title,
+                    summary: summary || alt_summary,
+                    link: link
+                })
 
-                    db.Article.create(result).then(function (dbArticle) {
-                        console.log(dbArticle);
-                    }).catch(function (err) {
-                        console.log(err);
-                    })
+
+
+                // result.title = title || alt_title,
+                //     result.summary = summary || alt_summary,
+                //     result.link = link,
+
+                //     db.Article.create(result).then(function (dbArticle) {
+                //         // console.log(dbArticle);
+                //         res.json(dbArticle);
+                //     }).catch(function (err) {
+                //         console.log(err);
+                //     })
+
+
             }
-            // }
-        });
 
-        // res.send("Scrape Complete");
+        });
+        console.log(result)
+        res.json(result);
+
     }).catch(function (err) {
-        res.json(err);
+        console.log(err);
     })
 
 });
@@ -82,6 +96,14 @@ app.get("/articles", function (req, res) {
         res.json(err);
     })
 });
+
+app.post("/articles", function (req, res) {
+    db.Article.create(req.body).then(function (dbArticle) {
+        console.log(dbArticle);
+    }).catch(function (err) {
+        console.log(err);
+    })
+})
 
 app.get("/articles/:id", function (req, res) {
     db.Article.findOne({ _id: req.params.id }).populate("note").then(function (dbArticle) {
