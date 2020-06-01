@@ -2,3 +2,16 @@ h1, h2, h3, h4, p, input, button, textarea {
     font-family: 'Abril Fatface', cursive;
     font-style: 'Abril Fatface', cursive;
 }
+
+body {
+    background-color: #777777;
+    background-image: url("./webb-dark.png");
+    background-size: auto;
+    background-repeat: repeat;
+    z-index: -2;
+    object-position: center;
+  }
+
+  .jumbotron {
+    background-color: black;
+  }
