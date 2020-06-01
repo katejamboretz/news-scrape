@@ -1,7 +1,9 @@
 
 $(document).on("click", "#saved", function () {
+    $("#title").empty();
     $("#articles").empty();
-    $("#articles").append("<div class='card'><div class='card-body'><h1 class='text-center'>Saved Articles</h1></div></div>")
+
+    $("#title").append("<div class='card'><div class='card-body'><h1 class='text-center'>Saved Articles</h1></div></div>");
 
     $.getJSON("/articles", function (data) {
         for (var i = 0; i < data.length; i++) {
@@ -11,8 +13,10 @@ $(document).on("click", "#saved", function () {
 });
 
 $(document).on("click", "#scrape", function () {
+    $("#title").empty();
     $("#articles").empty();
-    $("#articles").append("<div class='card'><div class='card-body'><h1 class='text-center'>Scraped Articles</h1></div></div>")
+
+    $("#title").append("<div class='card'><div class='card-body'><h1 class='text-center'>Scraped Articles</h1></div></div>")
 
     $.ajax({
         method: "GET",
