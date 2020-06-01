@@ -63,20 +63,6 @@ app.get("/scrape", function (req, res) {
                     link: link
                 })
 
-
-
-                // result.title = title || alt_title,
-                //     result.summary = summary || alt_summary,
-                //     result.link = link,
-
-                //     db.Article.create(result).then(function (dbArticle) {
-                //         // console.log(dbArticle);
-                //         res.json(dbArticle);
-                //     }).catch(function (err) {
-                //         console.log(err);
-                //     })
-
-
             }
 
         });
@@ -129,7 +115,17 @@ app.delete("/articles/:id", function (req, res) {
     }).catch(function (err) {
         res.json(err);
     })
-})
+});
+
+// Unsure why this function is not working... will add this functionality later
+
+// app.delete("/articles/delete-all", function (req, res) {
+//     db.Article.deleteMany({}).then(function (dbArticle) {
+//         res.json(dbArticle);
+//     }).catch(function (err) {
+//         res.json(err);
+//     });
+// });
 
 app.listen(PORT, function () {
     console.log("App running on port " + PORT + "!");

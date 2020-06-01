@@ -12,16 +12,21 @@
 
 <body>
     <div id="wrapper">
-        <div class="jumbotron">
-            <h1 class="display-4 text-center">NYT News Scrape</h1>
+        <div class="jumbotron bg-dark">
+            <h1 class="display-4 bg-dark text-white text-center">NYT News Scrape</h1>
             <hr class="my-4">
-            <p class="lead text-center m-5">View articles from the New Yort Times, access contents with links to the
+            <p>
+            <h4 class="bg-black text-white text-center m-5">View articles from the New Yort Times, access contents with
+                links to the
                 full
                 text, and keep
                 track of your favorites by leaving notes.
+            </h4>
             </p>
-            <button class='btn btn-primary m-3' id='scrape'>Scrape Articles</button>
-            <button class='btn btn-primary m-3' id='saved'>Saved Articles</button>
+            <button class='btn btn-danger text-body m-5' id='scrape'>Scrape Articles</button>
+            <button class='btn btn-danger text-body m-5' id='clear-scrape'>Clear Scraped</button>
+            <button class='btn btn-warning m-5' id='saved'>Saved Articles</button>
+            <!-- <button class='btn btn-warning m-5' id='delete-saved'>Delete Saved</button> -->
         </div>
         <div id="title"></div>
         <div id="articles" class="row row-cols-1 row-cols-md-2"></div>

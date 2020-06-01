@@ -33,6 +33,11 @@ $(document).on("click", "#scrape", function () {
     })
 });
 
+$(document).on("click", "#clear-scrape", function () {
+    $("#title").empty();
+    $("#articles").empty();
+})
+
 $(document).on("click", "#save-article", function () {
     // let thisID = $(this).attr("data-id");
     let thisTitle = $(this).attr("article-title");
@@ -52,7 +57,22 @@ $(document).on("click", "#save-article", function () {
         console.log(data);
 
     })
-})
+});
+
+// Unsure why this function is not working... will add this functionality later
+
+// $(document).on("click", "#delete-saved", function () {
+//     $.ajax({
+//         method: "DELETE",
+//         url: "/articles/delete-all"
+//     }).then(function (data) {
+//         console.log(data);
+//         refreshSaved();
+//     })
+// })
+
+
+// notes are orphaned - need to update schema to prevent this
 
 $(document).on("click", "#remove-article", function () {
     let thisID = $(this).attr("data-id");
@@ -61,6 +81,7 @@ $(document).on("click", "#remove-article", function () {
         url: "/articles/" + thisID
     }).then(function (data) {
         console.log(data);
+        $("#notes").empty();
         refreshSaved();
     })
 })
