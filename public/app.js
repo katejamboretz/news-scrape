@@ -80,7 +80,7 @@ $(document).on("click", "#remove-article", function () {
         method: "DELETE",
         url: "/articles/" + thisID
     }).then(function (data) {
-        console.log(data);
+        // console.log(data);
         $("#notes").empty();
         refreshSaved();
     })
