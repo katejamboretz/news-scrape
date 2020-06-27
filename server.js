@@ -55,7 +55,7 @@ app.get("/scrape", function (req, res) {
             //     let summary = "Article summary not available."
 
 
-            if (link !== undefined) {
+            if ((link !== undefined) && (link !== 'https://www.nytimes.com/interactive/2020/us/coronavirus-us-cases.html')) {
                 result.push({
                     _id: _id,
                     title: title || alt_title,
@@ -66,7 +66,7 @@ app.get("/scrape", function (req, res) {
             }
 
         });
-        // console.log(result)
+        console.log(result)
         res.json(result);
 
     }).catch(function (err) {
@@ -116,6 +116,17 @@ app.delete("/articles/:id", function (req, res) {
         res.json(err);
     })
 });
+
+// Can add this in the future!
+
+// app.post("/users", function (req, res) {
+//     User.create(req.body).then(function (dbUser) {
+//         res.json(dbUser);
+//     })
+//         .catch(function (err) {
+//             res.json(err);
+//         })
+// })
 
 // Unsure why this function is not working... will add this functionality later
 
